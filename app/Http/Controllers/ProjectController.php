@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
+use App\Models\Client;
+use App\Models\Developer;
 use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -17,9 +19,9 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function show(string $name, string $firstname): View
+    public function show(int $id): View
     {
-        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $project = Project::where('id', $id)->firstOrFail();
 
         return view('project.show', [
             'project' => $project
@@ -28,9 +30,13 @@ class ProjectController extends Controller
 
     public function create()
     {
+        $clients = Client::all();
+        $managers = Developer::where('isManager', true)->get();
         $project = new Project();
         return view('project.create', [
-            'project' => $project
+            'project' => $project,
+            'clients' => $clients,
+            'managers' => $managers,
         ]);
     }
 
@@ -39,29 +45,31 @@ class ProjectController extends Controller
         $project = Project::create($request->validated());
 
         return redirect()->route('project.show', [
-            'name' => $project->name,
-            'firstname' => $project->firstname
+            'id' => $project->id,
         ])->with('success', "L'project a bien été sauvegardé");
     }
 
 
-    public function edit(string $name, string $firstname): View
+    public function edit(int $id): View
     {
-        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $clients = Client::all();
+        $managers = Developer::where('isManager', true)->get();
+        $project = Project::where('id', $id)->firstOrFail();
 
         return view('project.edit', [
-            'project' => $project
+            'project' => $project,
+            'clients' => $clients,
+            'managers' => $managers,
         ]);
     }
 
-    public function update(CreateProjectRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateProjectRequest $request, int $id): RedirectResponse
     {
-        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $project = Project::where('id', $id)->firstOrFail();
         $project->update($request->validated());
 
         return redirect()->route('project.show', [
-            'name' => $project->name,
-            'firstname' => $project->firstname
+            'id' => $project->id,
         ])->with('success', "L'project a bien été mis à jour");
     }
 }
