@@ -2,66 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAuteurRequest;
-use App\Models\Auteur;
+use App\Http\Requests\CreateTaskRequest;
+use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 
-class AuteurController extends Controller
+class TaskController extends Controller
 {
     public function index(): View
     {
-        return view('auteur.index', [
-            'auteurs' => Auteur::orderBy('id', 'desc')->paginate(3)
+        return view('task.index', [
+            'tasks' => Task::orderBy('id', 'desc')->paginate(3)
         ]);
     }
 
     public function show(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $task = Task::where('name', $name)->where('name', $firstname)->firstOrFail();
 
-        return view('auteur.show', [
-            'auteur' => $auteur
+        return view('task.show', [
+            'task' => $task
         ]);
     }
 
     public function create()
     {
-        $auteur = new Auteur();
-        return view('auteur.create', [
-            'auteur' => $auteur
+        $task = new Task();
+        return view('task.create', [
+            'task' => $task
         ]);
     }
 
-    public function store(CreateAuteurRequest $request)
+    public function store(CreateTaskRequest $request)
     {
-        $auteur = Auteur::create($request->validated());
+        $task = Task::create($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été sauvegardé");
+        return redirect()->route('task.show', [
+            'name' => $task->name,
+            'firstname' => $task->firstname
+        ])->with('success', "L'task a bien été sauvegardé");
     }
 
 
     public function edit(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $task = Task::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('auteur.edit', [
-            'auteur' => $auteur
+        return view('task.edit', [
+            'task' => $task
         ]);
     }
 
-    public function update(CreateAuteurRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateTaskRequest $request, string $name, string $firstname): RedirectResponse
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
-        $auteur->update($request->validated());
+        $task = Task::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $task->update($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été mis à jour");
+        return redirect()->route('task.show', [
+            'name' => $task->name,
+            'firstname' => $task->firstname
+        ])->with('success', "L'task a bien été mis à jour");
     }
 }
