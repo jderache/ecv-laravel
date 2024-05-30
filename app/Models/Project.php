@@ -10,4 +10,19 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'developer_id'];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class);
+    }
 }

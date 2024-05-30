@@ -10,4 +10,14 @@ class Developer extends Model
     use HasFactory;
 
     protected $fillable = ['firstname', 'lastname', 'function'];
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
