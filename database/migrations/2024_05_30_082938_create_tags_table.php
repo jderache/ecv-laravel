@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
+   
         Schema::create('task-tags', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Task::class)->constrained()->onDelete('cascade');
