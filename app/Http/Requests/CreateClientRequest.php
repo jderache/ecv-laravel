@@ -22,7 +22,9 @@ class CreateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'society' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'website' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -17,9 +17,9 @@ class ClientController extends Controller
         ]);
     }
 
-    public function show(string $name, string $firstname): View
+    public function show(int $id): View
     {
-        $client = Client::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $client = Client::where('id', $id)->firstOrFail();
 
         return view('client.show', [
             'client' => $client
@@ -39,24 +39,23 @@ class ClientController extends Controller
         $client = Client::create($request->validated());
 
         return redirect()->route('client.show', [
-            'name' => $client->name,
-            'firstname' => $client->firstname
+            'id' => $client->id,
         ])->with('success', "L'client a bien été sauvegardé");
     }
 
 
-    public function edit(string $name, string $firstname): View
+    public function edit(int $id): View
     {
-        $client = Client::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $client = Client::where('id', $id)->firstOrFail();
 
         return view('client.edit', [
             'client' => $client
         ]);
     }
 
-    public function update(CreateClientRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateClientRequest $request, int $id): RedirectResponse
     {
-        $client = Client::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $client = Client::where('id', $id)->firstOrFail();
         $client->update($request->validated());
 
         return redirect()->route('client.show', [
