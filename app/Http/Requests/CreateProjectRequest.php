@@ -22,7 +22,10 @@ class CreateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'client_id' => 'required|integer',
+            'developer_id' => 'required|integer',
         ];
     }
 }
