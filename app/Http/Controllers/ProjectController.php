@@ -2,66 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAuteurRequest;
-use App\Models\Auteur;
+use App\Http\Requests\CreateProjectRequest;
+use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 
-class AuteurController extends Controller
+class ProjectController extends Controller
 {
     public function index(): View
     {
-        return view('auteur.index', [
-            'auteurs' => Auteur::orderBy('id', 'desc')->paginate(3)
+        return view('admin.project.index', [
+            'projects' => Project::orderBy('id', 'desc')->paginate(3)
         ]);
     }
 
     public function show(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('auteur.show', [
-            'auteur' => $auteur
+        return view('admin.project.show', [
+            'project' => $project
         ]);
     }
 
     public function create()
     {
-        $auteur = new Auteur();
-        return view('auteur.create', [
-            'auteur' => $auteur
+        $project = new Project();
+        return view('admin.project.create', [
+            'project' => $project
         ]);
     }
 
-    public function store(CreateAuteurRequest $request)
+    public function store(CreateProjectRequest $request)
     {
-        $auteur = Auteur::create($request->validated());
+        $project = Project::create($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été sauvegardé");
+        return redirect()->route('admin.project.show', [
+            'name' => $project->name,
+            'firstname' => $project->firstname
+        ])->with('success', "L'project a bien été sauvegardé");
     }
 
 
     public function edit(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('auteur.edit', [
-            'auteur' => $auteur
+        return view('admin.project.edit', [
+            'project' => $project
         ]);
     }
 
-    public function update(CreateAuteurRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateProjectRequest $request, string $name, string $firstname): RedirectResponse
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
-        $auteur->update($request->validated());
+        $project = Project::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $project->update($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été mis à jour");
+        return redirect()->route('admin.project.show', [
+            'name' => $project->name,
+            'firstname' => $project->firstname
+        ])->with('success', "L'project a bien été mis à jour");
     }
 }

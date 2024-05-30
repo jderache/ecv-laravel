@@ -2,66 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateAuteurRequest;
-use App\Models\Auteur;
+use App\Http\Requests\CreateDeveloperRequest;
+use App\Models\Developer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 
-class AuteurController extends Controller
+class DeveloperController extends Controller
 {
     public function index(): View
     {
-        return view('auteur.index', [
-            'auteurs' => Auteur::orderBy('id', 'desc')->paginate(3)
+        return view('admin.developer.index', [
+            'developers' => Developer::orderBy('id', 'desc')->paginate(3)
         ]);
     }
 
     public function show(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('auteur.show', [
-            'auteur' => $auteur
+        return view('admin.developer.show', [
+            'developer' => $developer
         ]);
     }
 
     public function create()
     {
-        $auteur = new Auteur();
-        return view('auteur.create', [
-            'auteur' => $auteur
+        $developer = new Developer();
+        return view('admin.developer.create', [
+            'developer' => $developer
         ]);
     }
 
-    public function store(CreateAuteurRequest $request)
+    public function store(CreateDeveloperRequest $request)
     {
-        $auteur = Auteur::create($request->validated());
+        $developer = Developer::create($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été sauvegardé");
+        return redirect()->route('admin.developer.show', [
+            'name' => $developer->name,
+            'firstname' => $developer->firstname
+        ])->with('success', "L'developer a bien été sauvegardé");
     }
 
 
     public function edit(string $name, string $firstname): View
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('auteur.edit', [
-            'auteur' => $auteur
+        return view('admin.developer.edit', [
+            'developer' => $developer
         ]);
     }
 
-    public function update(CreateAuteurRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateDeveloperRequest $request, string $name, string $firstname): RedirectResponse
     {
-        $auteur = Auteur::where('name', $name)->where('firstname', $firstname)->firstOrFail();
-        $auteur->update($request->validated());
+        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer->update($request->validated());
 
-        return redirect()->route('auteur.show', [
-            'name' => $auteur->name,
-            'firstname' => $auteur->firstname
-        ])->with('success', "L'auteur a bien été mis à jour");
+        return redirect()->route('admin.developer.show', [
+            'name' => $developer->name,
+            'firstname' => $developer->firstname
+        ])->with('success', "L'developer a bien été mis à jour");
     }
 }
