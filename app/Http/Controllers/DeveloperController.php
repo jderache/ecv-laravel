@@ -12,7 +12,7 @@ class DeveloperController extends Controller
 {
     public function index(): View
     {
-        return view('admin.developer.index', [
+        return view('developer.index', [
             'developers' => Developer::orderBy('id', 'desc')->paginate(3)
         ]);
     }
@@ -21,7 +21,7 @@ class DeveloperController extends Controller
     {
         $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('admin.developer.show', [
+        return view('developer.show', [
             'developer' => $developer
         ]);
     }
@@ -29,7 +29,7 @@ class DeveloperController extends Controller
     public function create()
     {
         $developer = new Developer();
-        return view('admin.developer.create', [
+        return view('developer.create', [
             'developer' => $developer
         ]);
     }
@@ -38,7 +38,7 @@ class DeveloperController extends Controller
     {
         $developer = Developer::create($request->validated());
 
-        return redirect()->route('admin.developer.show', [
+        return redirect()->route('developer.show', [
             'name' => $developer->name,
             'firstname' => $developer->firstname
         ])->with('success', "L'developer a bien été sauvegardé");
@@ -49,7 +49,7 @@ class DeveloperController extends Controller
     {
         $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
 
-        return view('admin.developer.edit', [
+        return view('developer.edit', [
             'developer' => $developer
         ]);
     }
@@ -59,7 +59,7 @@ class DeveloperController extends Controller
         $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
         $developer->update($request->validated());
 
-        return redirect()->route('admin.developer.show', [
+        return redirect()->route('developer.show', [
             'name' => $developer->name,
             'firstname' => $developer->firstname
         ])->with('success', "L'developer a bien été mis à jour");
