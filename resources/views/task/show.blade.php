@@ -1,15 +1,12 @@
 @extends('base')
 
-@section('title', $auteur->name . ' ' . $auteur->firstname)
+@section('title', $task->name)
 
 @section('content')
 <article>
-    <h1>{{ $auteur->name }} {{ $auteur->firstname }}</h1>
+    <h1>{{ $task->name }}</h1>
     <p>
-        {{ $auteur->email }}
-    </p>
-    <p>
-        {{ $auteur->description }}
+        {{ $task->description }}
     </p>
 </article>
 @endsection

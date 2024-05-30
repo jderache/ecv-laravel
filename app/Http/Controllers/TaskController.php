@@ -57,6 +57,7 @@ class TaskController extends Controller
     {
         $task = Task::where('id', $id)->firstOrFail();
         $task->update($request->validated());
+        
 
         return redirect()->route('task.show', [
             'id' => $task->id,
