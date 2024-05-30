@@ -10,4 +10,9 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'isStatus'];
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }

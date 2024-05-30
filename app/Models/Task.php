@@ -10,4 +10,19 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description'];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function developers()
+    {
+        return $this->belongsToMany(Developer::class);
+    }
 }
