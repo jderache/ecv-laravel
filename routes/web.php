@@ -31,9 +31,9 @@ Route::prefix('/admin')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
-        Route::get('/{name}', 'show')->where(['name' => '[a-z0-9\-]+', 'firstname' => '[a-z0-9\-]+'])->name('show');
-        Route::get('/{name}/edit', 'edit')->name('edit');
-        Route::post('/{name}/edit', 'update');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}/edit', 'update');
     });
     Route::prefix('/project')->name('project.')->controller(ProjectController::class)->group(function () {
         Route::get('/', 'index')->name('index');

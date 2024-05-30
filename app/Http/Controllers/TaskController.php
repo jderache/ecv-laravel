@@ -13,13 +13,13 @@ class TaskController extends Controller
     public function index(): View
     {
         return view('task.index', [
-            'tasks' => Task::orderBy('id', 'desc')->paginate(3)
+            'tasks' => Task::orderBy('id', 'desc')->paginate(5)
         ]);
     }
 
-    public function show(string $name, string $firstname): View
+    public function show(int $id): View
     {
-        $task = Task::where('name', $name)->where('name', $firstname)->firstOrFail();
+        $task = Task::where('id', $id)->firstOrFail();
 
         return view('task.show', [
             'task' => $task
@@ -39,29 +39,27 @@ class TaskController extends Controller
         $task = Task::create($request->validated());
 
         return redirect()->route('task.show', [
-            'name' => $task->name,
-            'firstname' => $task->firstname
+            'id' => $task->id,
         ])->with('success', "L'task a bien été sauvegardé");
     }
 
 
-    public function edit(string $name, string $firstname): View
+    public function edit(int $id): View
     {
-        $task = Task::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $task = Task::where('id', $id)->firstOrFail();
 
         return view('task.edit', [
             'task' => $task
         ]);
     }
 
-    public function update(CreateTaskRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateTaskRequest $request, int $id): RedirectResponse
     {
-        $task = Task::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $task = Task::where('id', $id)->firstOrFail();
         $task->update($request->validated());
 
         return redirect()->route('task.show', [
-            'name' => $task->name,
-            'firstname' => $task->firstname
+            'id' => $task->id,
         ])->with('success', "L'task a bien été mis à jour");
     }
 }
