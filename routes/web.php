@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/admin')->name('admin.')->group(function () {
+Route::prefix('/admin')->group(function () {
     Route::prefix('/client')->name('client.')->controller(ClientController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/new', 'create')->name('create');
@@ -31,9 +31,9 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
-        Route::get('/{name}-{firstname}', 'show')->where(['name' => '[a-z0-9\-]+', 'firstname' => '[a-z0-9\-]+'])->name('show');
-        Route::get('/{name}-{firstname}/edit', 'edit')->name('edit');
-        Route::post('/{name}-{firstname}/edit', 'update');
+        Route::get('/{name}', 'show')->where(['name' => '[a-z0-9\-]+', 'firstname' => '[a-z0-9\-]+'])->name('show');
+        Route::get('/{name}/edit', 'edit')->name('edit');
+        Route::post('/{name}/edit', 'update');
     });
     Route::prefix('/project')->name('project.')->controller(ProjectController::class)->group(function () {
         Route::get('/', 'index')->name('index');

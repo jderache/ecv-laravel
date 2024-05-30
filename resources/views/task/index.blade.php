@@ -11,16 +11,16 @@
     <p>
         {{ $task->description }}
     </p>
-    <!-- <p>
-        <a href="{{ route('task.show', ['name' => $task->name, 'firstname' => $task->firstname]) }}" class="btn btn-primary">
+    <p>
+        <a href="{{ route('task.show', ['name' => $task->name]) }}" class="btn btn-primary">
             Lire la suite
         </a>
     </p> -->
-    <!-- <p>
-        <a href="{{ route('task.edit', ['name' => $task->name, 'firstname' => $task->firstname]) }}" class="btn btn-secondary">
+    <p>
+        <a href="{{ route('task.edit', ['name' => $task->name]) }}" class="btn btn-secondary">
             Editer l'article
         </a>
-    </p> -->
+    </p>
 </article>
 @endforeach
 
