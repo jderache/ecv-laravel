@@ -1,7 +1,7 @@
 @extends('base')
 
-@section('title', 'Créer un auteur')
+@section('title', 'Créer une tâche')
 
 @section('content')
-@include('auteur.form')
+@include('task.form')
 @endsection
