@@ -16,10 +16,9 @@ class DeveloperController extends Controller
             'developers' => Developer::orderBy('id', 'desc')->paginate(3)
         ]);
     }
-
-    public function show(string $name, string $firstname): View
+    public function show(int $id): View
     {
-        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer = Developer::where('id', $id)->firstOrFail();
 
         return view('developer.show', [
             'developer' => $developer
@@ -37,31 +36,47 @@ class DeveloperController extends Controller
     public function store(CreateDeveloperRequest $request)
     {
         $developer = Developer::create($request->validated());
+        if ($request->has('isManager')) {
+            $developer->update([
+                'isManager' => true,
+            ]);
+        } else {
+            $developer->update([
+                'isManager' => false,
+            ]);
+        }
 
         return redirect()->route('developer.show', [
-            'name' => $developer->name,
-            'firstname' => $developer->firstname
+            'id' => $developer->id
         ])->with('success', "L'developer a bien été sauvegardé");
     }
 
 
-    public function edit(string $name, string $firstname): View
+    public function edit(int $id): View
     {
-        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer = Developer::where('id', $id)->firstOrFail();
 
         return view('developer.edit', [
             'developer' => $developer
         ]);
     }
 
-    public function update(CreateDeveloperRequest $request, string $name, string $firstname): RedirectResponse
+    public function update(CreateDeveloperRequest $request, int $id): RedirectResponse
     {
-        $developer = Developer::where('name', $name)->where('firstname', $firstname)->firstOrFail();
+        $developer = Developer::where('id', $id)->firstOrFail();
         $developer->update($request->validated());
+        if ($request->has('isManager')) {
+            $developer->update([
+                'isManager' => true,
+            ]);
+        } else {
+            $developer->update([
+                'isManager' => false,
+            ]);
+        }
 
         return redirect()->route('developer.show', [
-            'name' => $developer->name,
-            'firstname' => $developer->firstname
+            'id' => $developer->id,
         ])->with('success', "L'developer a bien été mis à jour");
     }
 }

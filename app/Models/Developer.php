@@ -9,7 +9,7 @@ class Developer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname', 'lastname', 'function'];
+    protected $fillable = ['firstname', 'lastname', 'function', 'isManager'];
 
     public function tasks()
     {
