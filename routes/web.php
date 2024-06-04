@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
@@ -43,4 +44,9 @@ Route::prefix('/admin')->group(function () {
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/edit', 'update');
     });
+});
+
+Route::prefix('/manager')->name('manager.')->controller(ManagerController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{id}', 'show')->name('show');
 });
