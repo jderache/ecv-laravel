@@ -3,6 +3,6 @@
 @section('title', 'Modifier un développeur')
 
 @section('content')
-@include('developer.form')
+@include('admin.developer.form')
 
 @endsection

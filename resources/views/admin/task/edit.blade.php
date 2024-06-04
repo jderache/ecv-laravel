@@ -3,6 +3,6 @@
 @section('title', 'Modifier une tâche')
 
 @section('content')
-@include('task.form')
+@include('admin.task.form')
 
 @endsection

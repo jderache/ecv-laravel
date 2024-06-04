@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
@@ -13,16 +15,16 @@ class TaskController extends Controller
 {
     public function index(): View
     {
-        return view('task.index', [
+        return view('admin.task.index', [
             'tasks' => Task::orderBy('id', 'desc')->paginate(5)
         ]);
     }
 
     public function show(int $id): View
-    {   
+    {
         $task = Task::where('id', $id)->firstOrFail();
 
-        return view('task.show', [
+        return view('admin.task.show', [
             'task' => $task,
         ]);
     }
@@ -32,10 +34,10 @@ class TaskController extends Controller
         // récupérer tous les projets la dedans
         $projects = Project::all();
         $developers = Developer::all();
-        
+
 
         $task = new Task();
-        return view('task.create', [
+        return view('admin.task.create', [
             'task' => $task,
             'projects' => $projects,
             'developers' => $developers,
@@ -46,7 +48,7 @@ class TaskController extends Controller
     {
         $task = Task::create($request->validated());
 
-        return redirect()->route('task.show', [
+        return redirect()->route('admin.task.show', [
             'id' => $task->id,
         ])->with('success', "L'task a bien été créé");
     }
@@ -56,7 +58,7 @@ class TaskController extends Controller
         $projects = Project::all();
         $developers = Developer::all();
         $task = Task::where('id', $id)->firstOrFail();
-        return view('task.edit', [
+        return view('admin.task.edit', [
             'task' => $task,
             'projects' => $projects,
             'developers' => $developers,
@@ -67,9 +69,9 @@ class TaskController extends Controller
     {
         $task = Task::where('id', $id)->firstOrFail();
         $task->update($request->validated());
-        
 
-        return redirect()->route('task.show', [
+
+        return redirect()->route('admin.task.show', [
             'id' => $task->id,
         ])->with('success', "L'task a bien été mis à jour");
     }

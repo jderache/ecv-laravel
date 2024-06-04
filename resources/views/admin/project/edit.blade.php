@@ -3,6 +3,6 @@
 @section('title', 'Modifier un projet')
 
 @section('content')
-@include('project.form')
+@include('admin.project.form')
 
 @endsection

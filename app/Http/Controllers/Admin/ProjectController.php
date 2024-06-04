@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProjectRequest;
 use App\Models\Client;
 use App\Models\Developer;
@@ -14,7 +15,7 @@ class ProjectController extends Controller
 {
     public function index(): View
     {
-        return view('project.index', [
+        return view('admin.project.index', [
             'projects' => Project::orderBy('id', 'desc')->paginate(3)
         ]);
     }
@@ -23,7 +24,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('id', $id)->firstOrFail();
 
-        return view('project.show', [
+        return view('admin.project.show', [
             'project' => $project
         ]);
     }
@@ -33,7 +34,7 @@ class ProjectController extends Controller
         $clients = Client::all();
         $managers = Developer::where('isManager', true)->get();
         $project = new Project();
-        return view('project.create', [
+        return view('admin.project.create', [
             'project' => $project,
             'clients' => $clients,
             'managers' => $managers,
@@ -44,7 +45,7 @@ class ProjectController extends Controller
     {
         $project = Project::create($request->validated());
 
-        return redirect()->route('project.show', [
+        return redirect()->route('admin.project.show', [
             'id' => $project->id,
         ])->with('success', "L'project a bien été sauvegardé");
     }
@@ -56,7 +57,7 @@ class ProjectController extends Controller
         $managers = Developer::where('isManager', true)->get();
         $project = Project::where('id', $id)->firstOrFail();
 
-        return view('project.edit', [
+        return view('admin.project.edit', [
             'project' => $project,
             'clients' => $clients,
             'managers' => $managers,
@@ -68,7 +69,7 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)->firstOrFail();
         $project->update($request->validated());
 
-        return redirect()->route('project.show', [
+        return redirect()->route('admin.project.show', [
             'id' => $project->id,
         ])->with('success', "L'project a bien été mis à jour");
     }

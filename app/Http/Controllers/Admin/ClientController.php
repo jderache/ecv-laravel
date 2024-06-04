@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +13,7 @@ class ClientController extends Controller
 {
     public function index(): View
     {
-        return view('client.index', [
+        return view('admin.client.index', [
             'clients' => Client::orderBy('id', 'desc')->paginate(3)
         ]);
     }
@@ -21,7 +22,7 @@ class ClientController extends Controller
     {
         $client = Client::where('id', $id)->firstOrFail();
 
-        return view('client.show', [
+        return view('admin.client.show', [
             'client' => $client
         ]);
     }
@@ -29,7 +30,7 @@ class ClientController extends Controller
     public function create()
     {
         $client = new Client();
-        return view('client.create', [
+        return view('admin.client.create', [
             'client' => $client
         ]);
     }
@@ -38,7 +39,7 @@ class ClientController extends Controller
     {
         $client = Client::create($request->validated());
 
-        return redirect()->route('client.show', [
+        return redirect()->route('admin.client.show', [
             'id' => $client->id,
         ])->with('success', "L'client a bien été sauvegardé");
     }
@@ -48,7 +49,7 @@ class ClientController extends Controller
     {
         $client = Client::where('id', $id)->firstOrFail();
 
-        return view('client.edit', [
+        return view('admin.client.edit', [
             'client' => $client
         ]);
     }
@@ -58,7 +59,7 @@ class ClientController extends Controller
         $client = Client::where('id', $id)->firstOrFail();
         $client->update($request->validated());
 
-        return redirect()->route('client.show', [
+        return redirect()->route('admin.client.show', [
             'name' => $client->name,
             'firstname' => $client->firstname
         ])->with('success', "L'client a bien été mis à jour");

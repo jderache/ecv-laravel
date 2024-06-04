@@ -3,5 +3,5 @@
 @section('title', 'Créer une tâche')
 
 @section('content')
-@include('task.form')
+@include('admin.task.form')
 @endsection
