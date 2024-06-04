@@ -8,10 +8,33 @@
     <p>
         Rôle: {{ $manager->function }}
     </p>
-    @if ($manager->isManager)
-    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900">
-        Manager
-    </span>
-    @endif
+    <h2>
+        Mes projets :
+    </h2>
+    @foreach ($manager->projects as $project)
+    <div class="border-2 border-gray-200 p-4 rounded-md m-4">
+        <h3>
+            Nom : {{ $project->name }}
+        </h3>
+        <p>
+            Description : {{ $project->description }}
+        </p>
+        <p>
+            Client : {{ $project->client->society}}
+        </p>
+        <p>
+            Taches à réalisées : 
+        </p>
+        <ul>
+            @foreach ($project->tasks as $task)
+            <div class="border-2 border-gray-200 p-4 rounded-md m-4">
+                <p>Développeur : {{ $task->developer->firstname }} {{ $task->developer->lastname }}</p> 
+                <p>{{ $task->name }}</p> 
+                <p>{{ $task->description }}</p> 
+            </div>
+            @endforeach
+        </ul>
+    </div>
+    @endforeach
 </article>
 @endsection

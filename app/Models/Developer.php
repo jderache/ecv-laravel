@@ -18,6 +18,6 @@ class Developer extends Model
 
     public function projects()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->hasMany(Project::class, 'developer_id');
     }
 }
