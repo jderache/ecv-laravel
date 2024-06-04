@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'project_id', 'developer_id'];
 
     public function tags()
     {
@@ -21,8 +21,8 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function developers()
+    public function developer()
     {
-        return $this->belongsToMany(Developer::class);
+        return $this->belongsTo(Developer::class);
     }
 }

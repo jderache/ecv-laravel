@@ -19,13 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Project::class)->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('developer-tasks', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Task::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Developer::class)->constrained();
+            $table->foreignIdFor(Developer::class)->constrained()->nullable();
             $table->timestamps();
         });
     }

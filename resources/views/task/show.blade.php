@@ -8,5 +8,12 @@
     <p>
         {{ $task->description }}
     </p>
+    <p>
+        Projet lié : {{ $task->project->name }}
+    </p>
+    <p>
+        Développeur : {{ $task->developer->firstname }} {{ $task->developer->lastname }}
+    
+    </p>
 </article>
 @endsection
