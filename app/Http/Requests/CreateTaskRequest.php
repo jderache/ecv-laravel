@@ -24,6 +24,8 @@ class CreateTaskRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'required|string',
+            'project_id' => 'required|integer',
+            'developer_id' => 'required|integer',
         ];
     }
 }

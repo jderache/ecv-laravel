@@ -17,6 +17,7 @@ class ClientController extends Controller
         ]);
     }
 
+
     public function show(int $id): View
     {
         $client = Client::where('id', $id)->firstOrFail();
@@ -26,10 +27,17 @@ class ClientController extends Controller
         ]);
     }
 
+    public function admin(): View
+    {
+        return view('admin.client.index', [
+            'clients' => Client::orderBy('id', 'desc')->paginate(3)
+        ]);
+    }
+
     public function create()
     {
         $client = new Client();
-        return view('client.create', [
+        return view('admin.client.create', [
             'client' => $client
         ]);
     }
@@ -48,7 +56,7 @@ class ClientController extends Controller
     {
         $client = Client::where('id', $id)->firstOrFail();
 
-        return view('client.edit', [
+        return view('admin.client.edit', [
             'client' => $client
         ]);
     }

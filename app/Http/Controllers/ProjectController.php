@@ -28,12 +28,19 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function admin(): View
+    {
+        return view('admin.project.index', [
+            'projects' => Project::orderBy('id', 'desc')->paginate(3)
+        ]);
+    }
+
     public function create()
     {
         $clients = Client::all();
         $managers = Developer::where('isManager', true)->get();
         $project = new Project();
-        return view('project.create', [
+        return view('admin.project.create', [
             'project' => $project,
             'clients' => $clients,
             'managers' => $managers,
@@ -56,7 +63,7 @@ class ProjectController extends Controller
         $managers = Developer::where('isManager', true)->get();
         $project = Project::where('id', $id)->firstOrFail();
 
-        return view('project.edit', [
+        return view('admin.project.edit', [
             'project' => $project,
             'clients' => $clients,
             'managers' => $managers,

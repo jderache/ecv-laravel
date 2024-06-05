@@ -6,6 +6,8 @@ use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Models\Project;
+use App\Models\Developer;
 
 
 class TaskController extends Controller
@@ -22,15 +24,29 @@ class TaskController extends Controller
         $task = Task::where('id', $id)->firstOrFail();
 
         return view('task.show', [
-            'task' => $task
+            'task' => $task,
+        ]);
+    }
+
+    public function admin(): View
+    {
+        return view('admin.task.index', [
+            'tasks' => Task::orderBy('id', 'desc')->paginate(3)
         ]);
     }
 
     public function create()
     {
+        // récupérer tous les projets la dedans
+        $projects = Project::all();
+        $developers = Developer::all();
+
+
         $task = new Task();
-        return view('task.create', [
-            'task' => $task
+        return view('admin.task.create', [
+            'task' => $task,
+            'projects' => $projects,
+            'developers' => $developers,
         ]);
     }
 
@@ -40,16 +56,18 @@ class TaskController extends Controller
 
         return redirect()->route('task.show', [
             'id' => $task->id,
-        ])->with('success', "L'task a bien été sauvegardé");
+        ])->with('success', "L'task a bien été créé");
     }
-
 
     public function edit(int $id): View
     {
+        $projects = Project::all();
+        $developers = Developer::all();
         $task = Task::where('id', $id)->firstOrFail();
-
-        return view('task.edit', [
-            'task' => $task
+        return view('admin.task.edit', [
+            'task' => $task,
+            'projects' => $projects,
+            'developers' => $developers,
         ]);
     }
 
@@ -57,7 +75,7 @@ class TaskController extends Controller
     {
         $task = Task::where('id', $id)->firstOrFail();
         $task->update($request->validated());
-        
+
 
         return redirect()->route('task.show', [
             'id' => $task->id,

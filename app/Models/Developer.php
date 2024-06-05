@@ -9,15 +9,15 @@ class Developer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['firstname', 'lastname', 'function'];
+    protected $fillable = ['firstname', 'lastname', 'function', 'isManager'];
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class);
+        return $this->hasMany(Task::class, 'developer_id');
     }
 
     public function projects()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->hasMany(Project::class, 'developer_id');
     }
 }
