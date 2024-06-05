@@ -12,25 +12,39 @@ Route::get('/', function () {
 });
 
 Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    })->name('index');
     Route::prefix('/client')->name('client.')->controller(ClientController::class)->group(function () {
+        Route::get('/', 'admin')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/edit', 'update');
     });
     Route::prefix('/developer')->name('developer.')->controller(DeveloperController::class)->group(function () {
+        Route::get('/', 'admin')->name('index');
+        Route::get('/new', 'create')->name('create');
+        Route::post('/new', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}/edit', 'update');
+    });
+    Route::prefix('/manager')->name('manager.')->controller(ManagerController::class)->group(function () {
+        Route::get('/', 'admin')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/edit', 'update');
     });
     Route::prefix('/project')->name('project.')->controller(ProjectController::class)->group(function () {
+        Route::get('/', 'admin')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::post('/{id}/edit', 'update');
     });
     Route::prefix('/task')->name('task.')->controller(TaskController::class)->group(function () {
+        Route::get('/', 'admin')->name('index');
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store')->name('store');
         Route::get('/{id}/edit', 'edit')->name('edit');

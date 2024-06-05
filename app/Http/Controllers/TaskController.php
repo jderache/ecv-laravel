@@ -28,6 +28,13 @@ class TaskController extends Controller
         ]);
     }
 
+    public function admin(): View
+    {
+        return view('admin.task.index', [
+            'tasks' => Task::orderBy('id', 'desc')->paginate(3)
+        ]);
+    }
+
     public function create()
     {
         // récupérer tous les projets la dedans

@@ -28,6 +28,13 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function admin(): View
+    {
+        return view('admin.project.index', [
+            'projects' => Project::orderBy('id', 'desc')->paginate(3)
+        ]);
+    }
+
     public function create()
     {
         $clients = Client::all();

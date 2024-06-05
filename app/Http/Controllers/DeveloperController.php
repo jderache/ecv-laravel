@@ -12,16 +12,25 @@ class DeveloperController extends Controller
 {
     public function index(): View
     {
+        $developers = Developer::orderBy('id', 'desc')->where('isManager', false)->paginate(3);
         return view('developer.index', [
-            'developers' => Developer::orderBy('id', 'desc')->paginate(3)
+            'developers' => $developers
         ]);
     }
     public function show(int $id): View
     {
-        $developer = Developer::where('id', $id)->firstOrFail();
+        $developer = Developer::where('id', $id)->where('isManager', false)->firstOrFail();
 
         return view('developer.show', [
             'developer' => $developer
+        ]);
+    }
+
+    public function admin(): View
+    {
+        $developers = Developer::orderBy('id', 'desc')->where('isManager', false)->paginate(3);
+        return view('admin.developer.index', [
+            'developers' => $developers
         ]);
     }
 
@@ -36,15 +45,9 @@ class DeveloperController extends Controller
     public function store(CreateDeveloperRequest $request)
     {
         $developer = Developer::create($request->validated());
-        if ($request->has('isManager')) {
-            $developer->update([
-                'isManager' => true,
-            ]);
-        } else {
-            $developer->update([
-                'isManager' => false,
-            ]);
-        }
+        $developer->update([
+            'isManager' => false,
+        ]);
 
         return redirect()->route('developer.show', [
             'id' => $developer->id
@@ -65,15 +68,6 @@ class DeveloperController extends Controller
     {
         $developer = Developer::where('id', $id)->firstOrFail();
         $developer->update($request->validated());
-        if ($request->has('isManager')) {
-            $developer->update([
-                'isManager' => true,
-            ]);
-        } else {
-            $developer->update([
-                'isManager' => false,
-            ]);
-        }
 
         return redirect()->route('developer.show', [
             'id' => $developer->id,

@@ -17,12 +17,20 @@ class ClientController extends Controller
         ]);
     }
 
+
     public function show(int $id): View
     {
         $client = Client::where('id', $id)->firstOrFail();
 
         return view('client.show', [
             'client' => $client
+        ]);
+    }
+
+    public function admin(): View
+    {
+        return view('admin.client.index', [
+            'clients' => Client::orderBy('id', 'desc')->paginate(3)
         ]);
     }
 
