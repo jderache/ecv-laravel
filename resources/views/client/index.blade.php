@@ -16,10 +16,6 @@
         </svg>
     </a>
 </div>
-
 @endforeach
 
-<div class="pagination">
-    {{ $clients->links() }}
-</div>
 @endsection
