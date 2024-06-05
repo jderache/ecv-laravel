@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProjectRequest;
 use App\Models\Client;
 use App\Models\Developer;
@@ -15,7 +14,7 @@ class ProjectController extends Controller
 {
     public function index(): View
     {
-        return view('admin.project.index', [
+        return view('project.index', [
             'projects' => Project::orderBy('id', 'desc')->paginate(3)
         ]);
     }
@@ -24,7 +23,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('id', $id)->firstOrFail();
 
-        return view('admin.project.show', [
+        return view('project.show', [
             'project' => $project
         ]);
     }
@@ -45,7 +44,7 @@ class ProjectController extends Controller
     {
         $project = Project::create($request->validated());
 
-        return redirect()->route('admin.project.show', [
+        return redirect()->route('project.show', [
             'id' => $project->id,
         ])->with('success', "L'project a bien été sauvegardé");
     }
@@ -69,7 +68,7 @@ class ProjectController extends Controller
         $project = Project::where('id', $id)->firstOrFail();
         $project->update($request->validated());
 
-        return redirect()->route('admin.project.show', [
+        return redirect()->route('project.show', [
             'id' => $project->id,
         ])->with('success', "L'project a bien été mis à jour");
     }

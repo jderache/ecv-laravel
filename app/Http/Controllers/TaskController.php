@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +14,7 @@ class TaskController extends Controller
 {
     public function index(): View
     {
-        return view('admin.task.index', [
+        return view('task.index', [
             'tasks' => Task::orderBy('id', 'desc')->paginate(5)
         ]);
     }
@@ -24,7 +23,7 @@ class TaskController extends Controller
     {
         $task = Task::where('id', $id)->firstOrFail();
 
-        return view('admin.task.show', [
+        return view('task.show', [
             'task' => $task,
         ]);
     }
@@ -48,7 +47,7 @@ class TaskController extends Controller
     {
         $task = Task::create($request->validated());
 
-        return redirect()->route('admin.task.show', [
+        return redirect()->route('task.show', [
             'id' => $task->id,
         ])->with('success', "L'task a bien été créé");
     }
@@ -71,7 +70,7 @@ class TaskController extends Controller
         $task->update($request->validated());
 
 
-        return redirect()->route('admin.task.show', [
+        return redirect()->route('task.show', [
             'id' => $task->id,
         ])->with('success', "L'task a bien été mis à jour");
     }

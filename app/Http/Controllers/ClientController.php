@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +12,7 @@ class ClientController extends Controller
 {
     public function index(): View
     {
-        return view('admin.client.index', [
+        return view('client.index', [
             'clients' => Client::orderBy('id', 'desc')->paginate(3)
         ]);
     }
@@ -22,7 +21,7 @@ class ClientController extends Controller
     {
         $client = Client::where('id', $id)->firstOrFail();
 
-        return view('admin.client.show', [
+        return view('client.show', [
             'client' => $client
         ]);
     }
@@ -39,7 +38,7 @@ class ClientController extends Controller
     {
         $client = Client::create($request->validated());
 
-        return redirect()->route('admin.client.show', [
+        return redirect()->route('client.show', [
             'id' => $client->id,
         ])->with('success', "L'client a bien été sauvegardé");
     }
@@ -59,7 +58,7 @@ class ClientController extends Controller
         $client = Client::where('id', $id)->firstOrFail();
         $client->update($request->validated());
 
-        return redirect()->route('admin.client.show', [
+        return redirect()->route('client.show', [
             'name' => $client->name,
             'firstname' => $client->firstname
         ])->with('success', "L'client a bien été mis à jour");
