@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    <div class="container">
+    <div class="max-w-screen-xl mx-auto">
         @yield('content')
     </div>
 
