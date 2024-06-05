@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index(): View
     {
         return view('task.index', [
-            'tasks' => Task::orderBy('id', 'desc')->paginate(5)
+            'tasks' => Task::orderBy('id', 'desc')->paginate(6)
         ]);
     }
 
@@ -56,7 +56,7 @@ class TaskController extends Controller
 
         return redirect()->route('task.show', [
             'id' => $task->id,
-        ])->with('success', "L'task a bien été créé");
+        ])->with('success', "La task a bien été sauvegardé");
     }
 
     public function edit(int $id): View
@@ -79,6 +79,6 @@ class TaskController extends Controller
 
         return redirect()->route('task.show', [
             'id' => $task->id,
-        ])->with('success', "L'task a bien été mis à jour");
+        ])->with('success', "La task a bien été mis à jour");
     }
 }
