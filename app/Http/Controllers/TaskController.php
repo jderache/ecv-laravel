@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTaskRequest;
+use App\Models\Tag;
 use App\Models\Task;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -40,13 +41,16 @@ class TaskController extends Controller
         // récupérer tous les projets la dedans
         $projects = Project::all();
         $developers = Developer::all();
-
+        $types = Tag::where('isStatus', false)->get();
+        $tags = Tag::where('isStatus', true)->get();
 
         $task = new Task();
         return view('admin.task.create', [
             'task' => $task,
             'projects' => $projects,
             'developers' => $developers,
+            'types' => $types,
+            'tags' => $tags,
         ]);
     }
 
