@@ -43,6 +43,8 @@ class TaskController extends Controller
         $developers = Developer::all();
         $types = Tag::where('isStatus', false)->get();
         $tags = Tag::where('isStatus', true)->get();
+        $type_id = null;
+        $tag_id = null;
 
         $task = new Task();
         return view('admin.task.create', [
@@ -51,6 +53,8 @@ class TaskController extends Controller
             'developers' => $developers,
             'types' => $types,
             'tags' => $tags,
+            'type_id' => $type_id,
+            'tag_id' => $tag_id,
         ]);
     }
 
@@ -73,12 +77,17 @@ class TaskController extends Controller
         $types = Tag::where('isStatus', false)->get();
         $tags = Tag::where('isStatus', true)->get();
         $task = Task::where('id', $id)->firstOrFail();
+        $type_id = $task->tags()->where('isStatus', false)->first()->id ?? null;
+        $tag_id = $task->tags()->where('isStatus', true)->first()->id ?? null;
+
         return view('admin.task.edit', [
             'task' => $task,
             'projects' => $projects,
             'developers' => $developers,
             'types' => $types,
             'tags' => $tags,
+            'type_id' => $type_id,
+            'tag_id' => $tag_id,
         ]);
     }
 
