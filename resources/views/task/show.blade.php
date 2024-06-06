@@ -15,5 +15,16 @@
         Développeur : {{ $task->developer->firstname }} {{ $task->developer->lastname }}
     
     </p>
+    @foreach($task->tags as $tag)
+    @if ($tag->isStatus)
+    <p>
+        Statut : {{ $tag->name }}
+    </p>
+    @else
+    <p>
+        Type : {{ $tag->name }}
+    </p>
+    @endif
+    @endforeach
 </article>
 @endsection
