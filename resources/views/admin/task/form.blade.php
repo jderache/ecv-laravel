@@ -37,6 +37,17 @@
             <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="type_id">Statut :</label>
+            <select id="type_id" class="form-control"name="type_id">
+                @foreach ($types as $type)
+                 <option value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+            @error("type_id")
+            {{ $message }}
+            @enderror
+        </div>
         <button class="flex w-fit items-center px-4 py-2 text-sm text-white bg-blue-700 rounded-lg justify-center hover:bg-blue-800 self-end">
             @if ($task->id)
             Modifier
