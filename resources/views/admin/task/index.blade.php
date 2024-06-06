@@ -21,14 +21,6 @@
     <div class="pagination pt-4">
         {{ $tasks->links() }}
     </div>
-    <div>
-        Statut de la tâche :
-        <ul>
-            @foreach ($types as $type)
-            <li>{{ $type->name }}</li>
-            @endforeach
-        </ul>
-    </div>
 </div>
 
 
