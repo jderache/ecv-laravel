@@ -38,13 +38,24 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="type_id">Statut :</label>
+            <label for="type_id">Type :</label>
             <select id="type_id" class="form-control"name="type_id">
                 @foreach ($types as $type)
-                 <option value="{{ $type->id }}">{{ $type->name }}</option>
+                 <option value="{{ $type->id }}" @if ($type->id == old('type_id', $task->type_id)) selected @endif>{{ $type->name }}</option>
                 @endforeach
             </select>
             @error("type_id")
+            {{ $message }}
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="tag_id">Statut :</label>
+            <select id="tag_id" class="form-control"name="tag_id">
+                @foreach ($tags as $tag)
+                 <option value="{{ $tag->id }}" @if ($tag->id == old('tag_id', $task->tag_id)) selected @endif>{{ $tag->name }}</option>
+                @endforeach
+            </select>
+            @error("tag_id")
             {{ $message }}
             @enderror
         </div>
