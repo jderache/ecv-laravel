@@ -67,11 +67,15 @@ class TaskController extends Controller
     {
         $projects = Project::all();
         $developers = Developer::all();
+        $types = Tag::where('isStatus', false)->get();
+        $tags = Tag::where('isStatus', true)->get();
         $task = Task::where('id', $id)->firstOrFail();
         return view('admin.task.edit', [
             'task' => $task,
             'projects' => $projects,
             'developers' => $developers,
+            'types' => $types,
+            'tags' => $tags,
         ]);
     }
 
