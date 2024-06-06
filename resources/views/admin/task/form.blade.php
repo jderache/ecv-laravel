@@ -1,6 +1,5 @@
 
 <form action="" method="post" class="flex flex-col gap-4 p-4">
-    <h1 class="text-2xl font-bold"> Modification de la tâche </h1>
         @csrf
         <div class="form-group flex flex-col">
             <label for="name" class="mb-2 font-medium text-gray-700">Nom de la tâche :</label>
