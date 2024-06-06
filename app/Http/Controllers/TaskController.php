@@ -57,6 +57,12 @@ class TaskController extends Controller
     public function store(CreateTaskRequest $request)
     {
         $task = Task::create($request->validated());
+        if ($request->has('type_id')) {
+            $task->tags()->sync($request->type_id);
+        }
+        if ($request->has('tag_id')) {
+            $task->tags()->sync($request->type_id);
+        }
 
         return redirect()->route('task.show', [
             'id' => $task->id,
@@ -83,6 +89,12 @@ class TaskController extends Controller
     {
         $task = Task::where('id', $id)->firstOrFail();
         $task->update($request->validated());
+        if ($request->has('type_id')) {
+            $task->tags()->sync($request->type_id);
+        }
+        if ($request->has('tag_id')) {
+            $task->tags()->sync($request->type_id);
+        }
 
 
         return redirect()->route('task.show', [
