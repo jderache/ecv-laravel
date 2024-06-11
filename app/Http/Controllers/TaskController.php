@@ -13,12 +13,12 @@ use App\Models\Developer;
 
 class TaskController extends Controller
 {
-    public function index(): View
-    {
-        return view('task.index', [
-            'tasks' => Task::orderBy('id', 'desc')->paginate(6)
-        ]);
-    }
+    // public function index(): View
+    // {
+    //     return view('task.index', [
+    //         'tasks' => Task::orderBy('id', 'desc')->paginate(6)
+    //     ]);
+    // }
 
     public function show(int $id): View
     {

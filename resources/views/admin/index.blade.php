@@ -4,8 +4,9 @@
 
 @section('content')
 <div class="p-4">
+    <a href="{{ route('index') }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
     <h1 class="mb-4 text-2xl font-bold">Pannel administrateur</h1>
-    <p class="mb-2 font-normal text-gray-700">Gérer mes :</p>
+    <p class="mb-2">Gérer les :</p>
     <ul class="flex flex-col gap-2">
         <li>
             <a href="{{ route('admin.project.index') }}" class="mt-auto flex w-fit items-center px-4 py-2 text-sm text-white bg-blue-700 rounded-lg justify-center hover:bg-blue-800">Projets</a>
