@@ -1,4 +1,5 @@
 <form action="" method="post" class="flex flex-col gap-4 p-4 bg-white">
+    <a href="{{ url()->previous() }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
     @csrf
     <div class="form-group flex flex-col mb-4">
         <label for="name" class="mb-2 font-medium text-gray-700">Nom de la tâche :</label>

@@ -13,7 +13,11 @@
     </p>
     <p class="mb-2">
         Développeur : 
-        <a href="{{ route('developer.show', ['id' => $task->developer->id]) }}" class="text-blue-700 underline">{{ $task->developer->firstname }} {{ $task->developer->lastname }}</a>
+        @if ($task->developer->isManager)
+            <a href="{{ route('manager.show', ['id' => $task->developer->id]) }}" class="text-blue-700 underline">{{ $task->developer->firstname }} {{ $task->developer->lastname }}</a>
+        @else
+            <a href="{{ route('developer.show', ['id' => $task->developer->id]) }}" class="text-blue-700 underline">{{ $task->developer->firstname }} {{ $task->developer->lastname }}</a>
+        @endif
     </p>
     @foreach($task->tags as $tag)
     @if ($tag->isStatus)

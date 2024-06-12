@@ -1,4 +1,5 @@
 <div class="p-4 pt-0">
+    <a href="{{ url()->previous() }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
     <form action="" method="post" class="flex flex-col gap-4">
         @csrf
         <div class="form-group flex flex-col mb-4">

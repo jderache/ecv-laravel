@@ -9,7 +9,7 @@
     <p class="mb-4">Fonction : {{ $manager->function }}</p>
     @if ($manager->projects->count() > 0)
         <h2 class="font-bold text-xl mb-4">Projets assignés :</h2>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2 mb-4">
             @foreach ($manager->projects as $project)
                 <div class="border-2 border-gray-200 p-2 pl-4 rounded-lg flex justify-between items-center">
                     <div>
@@ -25,7 +25,7 @@
     @else
         <p>Aucun projet assigné</p>
     @endif
-    @if ($manager->projects->count() > 0)
+    @if ($manager->tasks->count() > 0)
         <h2 class="font-bold text-xl my-4">Tâches assignées :</h2>
         <div class="flex flex-col gap-2">
             @foreach ($manager->tasks as $task)
