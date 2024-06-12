@@ -46,10 +46,9 @@ class ManagerController extends Controller
 
     public function store(CreateDeveloperRequest $request)
     {
-        $manager = Developer::create($request->validated());
-        $manager->update([
-            'isManager' => true,
-        ]);
+        $dev = $request->validated();
+        $dev['isManager'] = true;
+        $manager = Developer::create($dev);
 
         return redirect()->route('manager.show', [
             'id' => $manager->id

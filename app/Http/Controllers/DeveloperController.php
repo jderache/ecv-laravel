@@ -44,10 +44,9 @@ class DeveloperController extends Controller
 
     public function store(CreateDeveloperRequest $request)
     {
-        $developer = Developer::create($request->validated());
-        $developer->update([
-            'isManager' => false,
-        ]);
+        $dev = $request->validated();
+        $dev['isManager'] = false;
+        $developer = Developer::create($dev);
 
         return redirect()->route('developer.show', [
             'id' => $developer->id
