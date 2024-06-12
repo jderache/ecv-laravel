@@ -67,7 +67,7 @@ class TaskController extends Controller
 
         return redirect()->route('task.show', [
             'id' => $task->id,
-        ])->with('success', "La task a bien été sauvegardé");
+        ])->with('success', "La tâche a bien été sauvegardé.");
     }
 
     public function edit(int $id): View
@@ -103,6 +103,6 @@ class TaskController extends Controller
 
         return redirect()->route('task.show', [
             'id' => $task->id,
-        ])->with('success', "La task a bien été mis à jour");
+        ])->with('success', "La tâche a bien été mis à jour.");
     }
 }

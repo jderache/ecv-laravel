@@ -12,12 +12,6 @@ use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
-    // public function index(): View
-    // {
-    //     return view('project.index', [
-    //         'projects' => Project::orderBy('id', 'desc')->paginate(3)
-    //     ]);
-    // }
 
     public function show(int $id): View
     {

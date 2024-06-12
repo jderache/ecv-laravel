@@ -13,7 +13,7 @@ class ManagerController extends Controller
     public function index(): View
     {
 
-        $managers = Developer::orderBy('id', 'desc')->where('isManager', true)->paginate(3);
+        $managers = Developer::orderBy('id', 'desc')->where('isManager', true)->paginate(6);
         return view('manager.index', [
             'managers' => $managers
         ]);
@@ -40,7 +40,7 @@ class ManagerController extends Controller
     {
         $manager = new Developer();
         return view('admin.manager.create', [
-            'manager' => $manager
+            'manager' => $manager,
         ]);
     }
 

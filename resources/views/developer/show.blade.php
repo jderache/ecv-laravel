@@ -6,7 +6,7 @@
 <div class="p-4 pt-0">
     <a href="{{ url()->previous() }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
     <h1 class="text-2xl font-bold">{{ $developer->firstname }} {{ $developer->lastname }}</h1>
-    <p class="mb-4">{{ $developer->function }}</p>
+    <p class="mb-4">Fonction : {{ $developer->function }}</p>
     @if ($developer->tasks->count() > 0)
         <h2 class="font-bold text-xl mb-4">Tâches assignées :</h2>
         <div class="flex flex-col gap-2">

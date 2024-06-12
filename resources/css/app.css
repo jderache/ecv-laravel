@@ -1,5 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind screens;
-@tailwind variants;
+
+.alert-fadeout {
+    transition: opacity 1s ease-out;
+}

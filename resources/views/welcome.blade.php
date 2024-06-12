@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="p-4 pt-0">
     <img src="/image.png" class="mx-auto max-w-32 mb-4">
     <h1 class="text-7xl font-bold text-center text-balance mb-24">

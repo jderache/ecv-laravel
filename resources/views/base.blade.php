@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -26,16 +26,17 @@
         </ul>
     </header>
 
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
+@if (session('success'))
+    <x-alert type="success" :message="session('success')" class="mb-4"/>
+@endif
+@if (session('danger'))
+    <x-alert type="danger" :message="session('danger')" class="mb-4"/>
+@endif
+
 
     <div class="max-w-screen-xl	mx-auto pt-16">
         @yield('content')
     </div>
 
 </body>
-
 </html>
