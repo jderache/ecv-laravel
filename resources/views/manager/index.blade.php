@@ -19,8 +19,8 @@
         </div>
         @endforeach
     </div>
-    <div class="pagination pt-4">
-        {{ $managers->links() }}
+    <div class="pagination">
+        {{ $managers->links('pagination::tailwind') }}
     </div>
 </div>
 @endsection
