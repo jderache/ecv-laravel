@@ -1,4 +1,4 @@
-<form action="" method="post" class="flex flex-col gap-4 p-4">
+<form action="" method="post" class="flex flex-col">
     @csrf
     <div class="form-group flex flex-col mb-4">
         <label for="name" class="mb-2 font-medium text-gray-700">Nom du projet :</label>
