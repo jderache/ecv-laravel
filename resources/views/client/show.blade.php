@@ -3,8 +3,8 @@
 @section('title', $client->society)
 
 @section('content')
-<div class="p-4">
-    <a href="{{ route('index') }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Accueil</a>
+<div class="p-4 pt-0">
+    <a href="{{ url()->previous() }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
     <h1 class="text-2xl font-bold">{{ $client->society }}</h1>
     <address class="text-gray-500 mb-4">{{ $client->address }}</address>
     <p>

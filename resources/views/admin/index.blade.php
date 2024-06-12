@@ -3,8 +3,7 @@
 @section('admin', 'Pannel admin')
 
 @section('content')
-<div class="p-4">
-    <a href="{{ route('index') }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
+<div class="p-4 pt-0">
     <h1 class="mb-4 text-2xl font-bold">Pannel administrateur</h1>
     <p class="mb-2">Gérer les :</p>
     <ul class="flex flex-col gap-2">

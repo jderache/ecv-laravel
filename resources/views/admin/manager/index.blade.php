@@ -3,8 +3,7 @@
 @section('title', 'Liste des managers')
 
 @section('content')
-<div class="p-4">
-    <a href="{{ route('admin.index') }}" class="mb-4 flex w-fit items-center px-4 py-2 text-sm bg-gray-200 rounded-lg justify-center hover:bg-gray-200">Retour</a>
+<div class="p-4 pt-0">
     <h1 class="mb-4 text-2xl font-bold">Gérer les managers</h1>
     <a href="{{ route('admin.manager.create') }}" class="mt-auto mb-4 flex w-fit items-center px-4 py-2 text-sm text-white bg-blue-700 rounded-lg justify-center hover:bg-blue-800">Ajouter</a>
     <div class="grid gap-4 grid-cols-3">

@@ -22,7 +22,9 @@
         <label for="developer_id" class="mb-2 font-medium text-gray-700">Développeur :</label>
         <select id="developer_id" class="form-control p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700" name="developer_id">
             @foreach ($developers as $developer)
-            <option value="{{ $developer->id }}" @if ($developer->id == old('developer_id', $task->developer_id)) selected @endif>{{ $developer->firstname }} {{$developer->lastname}}</option>
+            <option value="{{ $developer->id }}" @if ($developer->id == old('developer_id', $task->developer_id)) selected @endif>
+                    {{ $developer->firstname }} {{$developer->lastname}}
+            </option>
             @endforeach
         </select>
         @error("developer_id")
@@ -40,7 +42,7 @@
         <label for="type_id" class="mb-2 font-medium text-gray-700">Type :</label>
         <select id="type_id" class="form-control p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700" name="type_id">
             @foreach ($types as $type)
-             <option value="{{ $type->id }}" @if ($type->id == old('type_id', $type_id)) selected @endif>{{ $type->name }}</option>
+                <option value="{{ $type->id }}" @if ($type->id == old('type_id', $type_id)) selected @endif>{{ strtoupper($type->name) }}</option>
             @endforeach
         </select>
         @error("type_id")
