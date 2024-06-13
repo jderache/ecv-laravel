@@ -80,4 +80,4 @@ php artisan serve
 
 3. Accédez à l'application dans votre navigateur à l'adresse suivante :
 
-http://127.0.0.1:8000
+http://localhost:8000
