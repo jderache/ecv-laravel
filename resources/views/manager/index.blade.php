@@ -5,7 +5,7 @@
 @section('content')
 <div class="p-4 pt-0">
     <h1 class="mb-4 text-2xl font-bold">Liste des managers</h1>
-    <div class="grid gap-4 grid-cols-3">
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         @foreach ($managers as $manager)
         <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow flex flex-col justify-items-between">
             <div>
